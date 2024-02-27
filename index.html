@@ -23,6 +23,7 @@ let score = 10;
 let genderFilter ="";
 let currentProfile = null;
 
+//Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering. 
 function fetchRandomProfile(){
 const url = genderFilter
 ? `https://randomuser.me/api/?inc=gender,name,location,pictures,dob&gender,${genderFilter}`
@@ -36,11 +37,13 @@ fetch(url)
 .catch((error) => consol.error("Feil med henting av tilfeldig profil:", error))
 }
 
+//Oppretter filter gender(kjønn) og kaller på fetchRandomProfile
 function filter(gender){
     genderFilter = gender
     fetchRandomProfile();
 }
 
+//funksjon for framvisning av kort på siden, henter in variabler div"card.
 function displayProfile() {
 const card = document.getElementById("card");
 }
