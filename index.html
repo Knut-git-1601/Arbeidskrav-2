@@ -33,6 +33,13 @@ fetch(url)
 .catch((error) => consol.error("Feil med henting av tilfeldig profil:", error))
 }
 
+function filter(gender){
+    genderFilter = gender
+    fetchRandomProfile();
+}
+
+
+
     </script>
 </body>
 </html>
