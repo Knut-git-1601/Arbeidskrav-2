@@ -30,6 +30,7 @@ fetch(url)
 .then((data) => {
     currentProfile = data.results[0];
 })
+.catch((error) => consol.error("Feil med henting av tilfeldig profil:", error))
 }
 
     </script>
