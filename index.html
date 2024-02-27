@@ -13,12 +13,25 @@
 <div onclick="filter"('female')></div>
 <div onclick="filter"('both')></div>
 
-<p>Hei</p>
+
     
     <script>
 let score = 10;
 let genderFilter ="";
- 
+let currentProfile = null;
+
+function fetchRandomProfile(){
+const url = genderFilter
+? `https://randomuser.me/api/?inc=gender,name,location,pictures,dob&gender,${genderFilter}`
+: "https://randomuser.me/api/?inc=gender,name,location,pictures,dob";
+
+fetch(url)
+.then((response) => response.json())
+.then((data) => {
+    currentProfile = data.results[0];
+})
+}
+
     </script>
 </body>
 </html>
