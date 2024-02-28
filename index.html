@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating app</title>
     <style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#card { 
+}
 
     </style>
 </head>
@@ -13,9 +22,9 @@
  <div id="card"></div>
  <div id="overview"></div>
     
-<div onclick="filter"('male')></div>
-<div onclick="filter"('female')></div>
-<div onclick="filter"('both')></div>
+<button onclick="filter"('male')>Søk menn</button>
+<button onclick="filter"('female')>Søk kvinne</button>
+<button onclick="filter"('both')>Søk begge</button>
 
 
     
@@ -23,7 +32,9 @@
 let score = 10;
 let genderFilter ="";
 let currentProfile = null;
-let likedProfiles
+let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) ||[];
+
+
 
 //Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering. 
 function fetchRandomProfile(){
@@ -41,11 +52,15 @@ fetch(url)
 .catch((error) => consol.error("Feil med henting av tilfeldig profil:", error))
 }
 
+
+
 //Oppretter filter gender(kjønn) og kaller på fetchRandomProfile
 function filter(gender){
     genderFilter = gender
     fetchRandomProfile();
 }
+
+
 
 //funksjon for framvisning av kort på siden, henter in variabler div"card.
 // oppdaterer koden med html koden som skal vise profilinformasjonen.
@@ -58,6 +73,8 @@ card.innerHTML = `
 <p>Land: ${currentProfile.location.country}</p>
 `
 }
+
+
 
 function updateOverview(){
 overview.innerHTML ="";
