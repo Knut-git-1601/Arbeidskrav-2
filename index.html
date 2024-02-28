@@ -65,8 +65,14 @@ likedProfiles.forEach((profile) =>{
     const card = document.createElement("div");
     card.classList = profile.gender;
     card.innerHTML = `
-    
+    <img src="${profile.pictures.large}" alt="Profile Pictures"
+<p>Navn: ${profile.name.first}</p>
+<p>Alder: ${profile.dob.age}</p>
+<p>Land: ${profile.location.country}</p>
+<button onclick="deleteProfile('${profile.name.first}')">Slett</button>
+<button onclick="editProfile('${profile.name.first}', '${profile.dob.age}','${profile.location.country}')">Endre</button>
     `;
+    overview.appendChild(card);
 });
 }
 
