@@ -75,15 +75,8 @@ card.innerHTML = `
 }
 
 function swipe(direction) {
-    if (score <= 0) {
-        const answer = confirm("Vil du swipe mer?");
-
-        if (answer) {
-            score = 10;
-            updateScore();
-        } else {
-            return;
-        }
+    while (score <= 0) {
+        const answer = prompt("Vil du swipe mer? Ja/Nei")
     }
 
     if (likedProfiles.length >= 10) {
