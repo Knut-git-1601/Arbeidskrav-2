@@ -76,7 +76,15 @@ card.innerHTML = `
 
 function swipe(direction) {
     while (score <= 0) {
-        const answer = prompt("Vil du swipe mer? Ja/Nei")
+        const answer = prompt("Vil du swipe mer? Ja/Nei");
+
+        if (answer.toLowerCase() === "ja") {
+            score = 10;
+            updateScore();
+            return;
+        } else if (answer.toLowerCase() === "nei") {
+            continue;
+        } 
     }
 
     if (likedProfiles.length >= 10) {
