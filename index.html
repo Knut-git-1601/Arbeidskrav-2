@@ -78,13 +78,17 @@ function swipe(direction) {
     if (score <= 0) {
         const answer = confirm("Vil du swipe mer?");
 
-    //må endres til ja/nei
         if (answer) {
             score = 10;
             updateScore();
         } else {
             return;
         }
+    }
+
+    if (likedProfiles.length >= 10) {
+        alert("Oversiktslisten er full. Slett en profil for å swipe igjen");
+        return;
     }
 }
 
