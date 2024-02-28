@@ -11,6 +11,7 @@
 <body>
 
  <div id="card"></div>
+ <div id="overview"></div>
     
 <div onclick="filter"('male')></div>
 <div onclick="filter"('female')></div>
@@ -22,6 +23,7 @@
 let score = 10;
 let genderFilter ="";
 let currentProfile = null;
+let likedProfiles
 
 //Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering. 
 function fetchRandomProfile(){
@@ -56,6 +58,18 @@ card.innerHTML = `
 <p>Land: ${currentProfile.location.country}</p>
 `
 }
+
+function updateOverview(){
+overview.innerHTML ="";
+likedProfiles.forEach((profile) =>{
+    const card = document.createElement("div");
+    card.classList = profile.gender;
+    card.innerHTML = `
+    
+    `;
+});
+}
+
 
 
     </script>
