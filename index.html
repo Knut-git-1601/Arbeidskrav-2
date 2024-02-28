@@ -84,7 +84,10 @@ function swipe(direction) {
             return;
         } else if (answer.toLowerCase() === "nei") {
             continue;
-        } 
+        } else {
+            alert("Du må skrive ja i neste felt for å fortsette med swipingen");
+            continue;
+        }
     }
 
     if (likedProfiles.length >= 10) {
