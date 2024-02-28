@@ -74,7 +74,11 @@ card.innerHTML = `
 `
 }
 
-
+function swipe(direction) {
+    if (score <= 0) {
+        const answer = confirm("Vil du swipe mer?");
+    }
+}
 
 function updateScore() {
     const scoreElement = document.getElementById("score");
