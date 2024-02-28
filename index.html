@@ -75,7 +75,8 @@ card.innerHTML = `
 }
 
 function updateScore() {
-    
+    const scoreElement = document.getElementById("score");
+    scoreElement.textContent = `Score: ${score}`;
 }
 
 function updateOverview(){
