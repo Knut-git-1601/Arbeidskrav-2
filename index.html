@@ -93,6 +93,11 @@ function swipe(direction) {
         alert("Oversiktslisten er full. Slett en profil for å swipe igjen");
         return;
     }
+
+    if (direction === "right") {
+       likedProfiles.push(currentProfile);
+      
+    }
 }
 
 function updateScore() {
