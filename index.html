@@ -35,7 +35,9 @@ let currentProfile = null;
 let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) ||[];
 
 document.addEventListener("keydown", function (event) {
-    
+    if (event.key === "ArrowLeft") {
+        swipe("left");
+    } 
 })
 
 document.addEventListener("DOMContentLoaded", function() {
