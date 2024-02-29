@@ -99,6 +99,10 @@ function swipe(direction) {
        localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles));
        updateOverview();
     }
+    fetchRandomProfile();
+    score--;
+    displayProfile();
+    updateScore();
 }
 
 function updateScore() {
