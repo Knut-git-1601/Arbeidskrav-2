@@ -12,8 +12,8 @@ body {
     justify-content: center;
 }
 
-#card { 
-}
+/*#card { 
+}*/
 
     </style>
 </head>
@@ -21,6 +21,23 @@ body {
 <div id="score"></div>
  <div id="card"></div>
  <div id="overview"></div>
+
+ <div class="overlay" id="overlay"></div> <!-- Overlay for popup vindu -->
+
+    <div class="popup" id="editPopup"> <!-- Popup vindu for redigering av bruker -->
+      <label for="newName">Navn:</label> <!-- Redigering av navn -->
+      <input type="text" id="newName" /> <!-- Input felt for nytt navn -->
+      <br />
+      <label for="newAge">Alder:</label> <!-- Redigering av alder -->
+      <input type="text" id="newAge" /> <!-- Input felt for ny alder -->
+      <br />
+      <label for="newPlace">Land:</label> <!-- Redigering av land -->
+      <input type="text" id="newPlace" /> <!-- Input felt for nytt land -->         
+      <br />
+
+      <button onclick="saveChanges()">Lagre endringer</button> <!-- Knapp for å lagre endringer -->
+      <button onclick="closePopup()">Avbryt</button> <!-- Knapp for å avbryte endringer -->
+    </div> <!-- Deklarerer en div tag -->
     
 <button onclick="filter"('male')>Søk menn</button>
 <button onclick="filter"('female')>Søk kvinne</button>
