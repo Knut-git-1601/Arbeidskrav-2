@@ -34,7 +34,9 @@ let genderFilter ="";
 let currentProfile = null;
 let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) ||[];
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    updateOverview();
+});
 
 //Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering. 
 function fetchRandomProfile(){
