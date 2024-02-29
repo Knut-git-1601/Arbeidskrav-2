@@ -42,6 +42,9 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+let likedProfiles =
+        JSON.parse(localStorage.getItem("likedProfiles")) || [];
+
 document.addEventListener("DOMContentLoaded", function() {
     updateOverview();
 });
