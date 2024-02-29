@@ -96,7 +96,7 @@ function swipe(direction) {
 
     if (direction === "right") {
        likedProfiles.push(currentProfile);
-      
+       localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles));
     }
 }
 
