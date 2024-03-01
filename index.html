@@ -215,6 +215,22 @@ function editProfile(name, age, place) { //Del 1 - Funksjon for å redigere prof
           document.getElementById("editPopup").style.display = "block"; // Viser popup
         }
     }
+
+    function saveChanges() { // Få de oppdaterte verdiene fra popup-vinduet
+        const newName = document.getElementById("newName").value; // Henter ut de oppdaterte verdiene fra input-feltene
+        const newAge = document.getElementById("newAge").value; // Henter ut de oppdaterte verdiene fra input-feltene
+        const newPlace = document.getElementById("newPlace").value; // Henter ut de oppdaterte verdiene fra input-feltene
+
+        // Oppdater profilen med de nye verdiene
+        likedProfiles[profileIndex].name.first = newName; // Oppdaterer navnet
+        likedProfiles[profileIndex].dob.age = newAge; // Oppdaterer alderen
+        likedProfiles[profileIndex].location.country = newPlace; // Oppdaterer landet
+
+        // Lagre endringer i localStorage og oppdater oversikten
+        localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles)); // Lagrer endringene i localStorage
+        updateOverview(); // Oppdaterer oversikten
+        
+      }
     </script>
 </body>
 </html>
