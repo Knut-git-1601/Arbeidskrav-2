@@ -5,24 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating app</title>
     <style>
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
 }
 
+    #card { 
+        border: 2px solid #ccc;
+        padding: 20px;
+        margin: 10px;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    #overview { /* Oversikt over alle brukere */
+        display: flex; /* Viser brukere i en rad */
+        flex-wrap: wrap; /* Brukere vil vises i flere rader */
+        justify-content: center; /* Justerer brukere til midten */
+      }
+
+      .popup { /* Popup vindu */
+        display: none; /* Popup vindu vil ikke vises */
+        position: fixed; /* Popup vindu vil være fast */
+        top: 50%; /* Popup vindu vil være 50% fra toppen */
+        left: 50%; /* Popup vindu vil være 50% fra venstre */
+        transform: translate(-50%, -50%); /* Popup vindu vil være 50% fra toppen og 50% fra venstre */
+        padding: 20px; /* Legger til padding på 20px */
+        background: white; /* Bakgrunnsfargen til popup vindu */
+        border: 2px solid #ccc; /* Legger til en border på 2px */
+        border-radius: 10px; /* Legger til en border radius på 10px */
+        z-index: 1; /* Setter z-index til 1 */
+      }
+      .overlay { /* Overlay for popup vindu */
+        display: none; /* Overlay vil ikke vises */
+        position: fixed; /* Overlay vil være fast */
+        top: 0; /* Overlay vil være 0 fra toppen */
+        left: 0; /* Overlay vil være 0 fra venstre */
+        width: 100%; /* Setter bredde til 100% */
+        height: 100%; /*// Setter høyde til 100% */
+        background: rgba(0, 0, 0, 0.5); /* Bakgrunnsfargen til overlay */
+        z-index: 1; /* Setter z-index til 1 */
+      }
     </style>
 </head>
 <body>
-
+<div id="score"></div>
  <div id="card"></div>
  <div id="overview"></div>
-    
-<button onclick="filter"('male')>Søk menn</button>
-<button onclick="filter"('female')>Søk kvinne</button>
-<button onclick="filter"('both')>Søk begge</button>
+
+ <div class="overlay" id="overlay"></div> <!-- Overlay for popup vindu -->
+
+    <div class="popup" id="editPopup"> <!-- Popup vindu for redigering av bruker -->
+      <label for="newName">Navn:</label> <!-- Redigering av navn -->
+      <input type="text" id="newName" /> <!-- Input felt for nytt navn -->
+      <br />
+      <label for="newAge">Alder:</label> <!-- Redigering av alder -->
+      <input type="text" id="newAge" /> <!-- Input felt for ny alder -->
+      <br />
+      <label for="newPlace">Land:</label> <!-- Redigering av land -->
+      <input type="text" id="newPlace" /> <!-- Input felt for nytt land -->         
+      <br />
+
+      <button onclick="saveChanges()">Lagre endringer</button> <!-- Knapp for å lagre endringer -->
+      <button onclick="closePopup()">Avbryt</button> <!-- Knapp for å avbryte endringer -->
+    </div><!-- Deklarerer en div tag -->
+    <div>
+        <button onclick="filter"('male')>Søk menn</button>
+        <button onclick="filter"('female')>Søk kvinne</button>
+        <button onclick="filter"('both')>Søk begge</button>
+    </div>
+
 
 
     
@@ -30,9 +87,21 @@ body {
 let score = 10;
 let genderFilter ="";
 let currentProfile = null;
-let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) ||[];
+let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) || [];
 
+document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft") {
+        swipe("left");
+    } else if (event.key === "ArrowRight") {
+        swipe("right");
+    }
+});
 
+let likedProfiles = JSON.parse(localStorage.getItem("likedProfiles")) || [];
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateOverview();
+});
 
 //Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering. 
 function fetchRandomProfile(){
@@ -69,10 +138,52 @@ card.innerHTML = `
 <p>Navn: ${currentProfile.name.first}</p>
 <p>Alder: ${currentProfile.dob.age}</p>
 <p>Land: ${currentProfile.location.country}</p>
-`
+`;
+if (currentProfile.gender ==="female"){
+    card.style.backgroundColor = "lightpink";
+} else if (currentProfile.gender === "male"){
+    card.style.backgroundColor = "cadetblue";
+} else {
+    card.style.backgroundColor = "yellow";
+}
+card.classList = currentProfile.gender;
 }
 
+function swipe(direction) {
+    while (score <= 0) {
+        const answer = prompt("Vil du swipe mer? Ja/Nei");
 
+        if (answer.toLowerCase() === "ja") {
+            score = 10;
+            updateScore();
+        } else if (answer.toLowerCase() === "nei") {
+            continue;
+        } else {
+            alert("Husk å skrive ja i neste felt for å fortsette med swipingen");
+            continue;
+        }
+    }
+
+    if (likedProfiles.length >= 10) {
+        alert("Oversiktslisten er full. Slett en profil for å swipe igjen");
+        return;
+    }
+
+    if (direction === "right") {
+       likedProfiles.push(currentProfile);
+       localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles));
+       updateOverview();
+    }
+    fetchRandomProfile();
+    score--;
+    displayProfile();
+    updateScore();
+}
+
+function updateScore() {
+    const scoreElement = document.getElementById("score");
+    scoreElement.textContent = `Score: ${score}`;
+}
 
 function updateOverview(){
 overview.innerHTML ="";
@@ -91,8 +202,63 @@ likedProfiles.forEach((profile) =>{
 });
 }
 
+function deleteProfile(name) { //Funksjon for å slette profil
+        likedProfiles = likedProfiles.filter( //Filtrerer ut profilen som skal slettes
+            (profile) => profile.name.first !== name //Sjekker om navnet på profilen er likt navnet som er valgt
+        );//Lagrer endringene i localStorage
+        localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles)); //Oppdaterer oversikten
+        updateOverview(); //Oppdaterer scoren
+      }
 
+function editProfile(name, age, place) { //Del 1 - Funksjon for å redigere profil
+        profileIndex = -1; //Lager en variabel for å lagre indeksen til profilen som skal redigeres
 
+        for (let i = 0; i < likedProfiles.length; i++) { //Løkke for å finne profilen som skal redigeres
+          if (likedProfiles[i].name.first === name) {//Sjekker om navnet på profilen er likt navnet som er valgt
+            profileIndex = i; //Lagrer indeksen til profilen
+            break; // Avslutt løkken når elementet er funnet
+          }
+        }
+        // Del 2 - If-setning håndterer: hvis profilen blir funnet så vises redigeringspopupen med de eksisterende verdiene
+        // Selve lagring av redigerte eksisterende verdier i input-feltene vil bli utført i en egen funksjon
+        
+        if (profileIndex !== -1) { // Hvis profilen ble funnet vis redigeringspopupen med de eksisterende verdiene
+          document.getElementById("newName").value = name; // Fyller inn eksisterende verdier i input-feltene
+          document.getElementById("newAge").value = age; // Fyller inn eksisterende verdier i input-feltene
+          document.getElementById("newPlace").value = place; // Fyller inn eksisterende verdier i input-feltene
+
+          // Vis overlegg og popup
+          document.getElementById("overlay").style.display = "block"; // Viser overlegg
+          document.getElementById("editPopup").style.display = "block"; // Viser popup
+        }
+    }
+
+    function saveChanges() { // Få de oppdaterte verdiene fra popup-vinduet
+        const newName = document.getElementById("newName").value; // Henter ut de oppdaterte verdiene fra input-feltene
+        const newAge = document.getElementById("newAge").value; // Henter ut de oppdaterte verdiene fra input-feltene
+        const newPlace = document.getElementById("newPlace").value; // Henter ut de oppdaterte verdiene fra input-feltene
+
+        // Oppdater profilen med de nye verdiene
+        likedProfiles[profileIndex].name.first = newName; // Oppdaterer navnet
+        likedProfiles[profileIndex].dob.age = newAge; // Oppdaterer alderen
+        likedProfiles[profileIndex].location.country = newPlace; // Oppdaterer landet
+
+        // Lagre endringer i localStorage og oppdater oversikten
+        localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles)); // Lagrer endringene i localStorage
+        updateOverview(); // Oppdaterer oversikten
+
+         closePopup();
+      }
+
+    function closePopup() { // Funksjon for å lukke popup-vinduet
+        document.getElementById("overlay").style.display = "none"; // Skjuler overlegg
+        document.getElementById("editPopup").style.display = "none"; // Skjuler popup
+       } 
+        //Sørger for å hente en tilfeldig profil og vise den ved sidenes lasting.
+        fetchRandomProfile(); // Henter en tilfeldig profil og viser den
+        displayProfile(); //  Viser profilen
+    
     </script>
 </body>
 </html>
+
