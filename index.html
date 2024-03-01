@@ -78,7 +78,8 @@
       <!-- Redigering av alder -->
       <input type="text" id="newAge" /><!-- Input felt for ny alder -->
       <br />
-      <label for="newPlace">Land:</label><!-- Redigering av land -->
+      <label for="newPlace">Land:</label
+      ><!-- Redigering av land -->
       <input type="text" id="newPlace" /><!-- Input felt for nytt land -->
       <br />
 
@@ -118,8 +119,8 @@
       //Henter inn tilfeldig brukerprofil gjennom API basert på valgte filter i linken, i slutten linken ligger det en string genderFilter som skal filtrere resultatet på kjønn. Link 2 er uten kjønnsfiltrering.
       function fetchRandomProfile() {
         const url = genderFilter
-          ? `https://randomuser.me/api/?inc=gender,name,location,pictures,dob&gender=${genderFilter}`
-          : "https://randomuser.me/api/?inc=gender,name,location,pictures,dob";
+          ? `https://randomuser.me/api/?inc=gender,name,location,picture,dob&gender=${genderFilter}`
+          : "https://randomuser.me/api/?inc=gender,name,location,picture,dob";
 
         fetch(url)
           .then((response) => response.json())
@@ -129,7 +130,8 @@
             displayProfile();
           })
           .catch((error) =>
-            console.error("Feil med henting av tilfeldig profil:", error));
+            console.error("Feil med henting av tilfeldig profil:", error)
+          );
       }
 
       //Oppretter filter gender(kjønn) og kaller på fetchRandomProfile
