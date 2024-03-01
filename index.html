@@ -229,7 +229,15 @@ function editProfile(name, age, place) { //Del 1 - Funksjon for å redigere prof
         // Lagre endringer i localStorage og oppdater oversikten
         localStorage.setItem("likedProfiles", JSON.stringify(likedProfiles)); // Lagrer endringene i localStorage
         updateOverview(); // Oppdaterer oversikten
+
+    function closePopup() { // Funksjon for å lukke popup-vinduet
+        document.getElementById("overlay").style.display = "none"; // Skjuler overlegg
+        document.getElementById("editPopup").style.display = "none"; // Skjuler popup
+        }
         
+        //Sørger for å hente en tilfeldig profil og vise den ved sidenes lasting.
+        fetchRandomProfile(); // Henter en tilfeldig profil og viser den
+        displayProfile(); //  Viser profilen
       }
     </script>
 </body>
