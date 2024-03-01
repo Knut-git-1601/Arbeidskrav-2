@@ -193,7 +193,18 @@ function deleteProfile(name) { //Funksjon for å slette profil
         updateOverview(); //Oppdaterer scoren
       }
 
+      function editProfile(name, age, place) { //Funksjon for å redigere profil
+        profileIndex = -1; //Lager en variabel for å lagre indeksen til profilen som skal redigeres
 
+        for (let i = 0; i < likedProfiles.length; i++) { //Løkke for å finne profilen som skal redigeres
+          if (likedProfiles[i].name.first === name) {//Sjekker om navnet på profilen er likt navnet som er valgt
+            profileIndex = i; //Lagrer indeksen til profilen
+            break; // Avslutt løkken når elementet er funnet
+          }
+        }
+        // Ny if-setning med logikk for å faktisk oppdatere profilen eller håndtere situasjoner der profilen
+        // ikke finnes skal inn her
+    }
     </script>
 </body>
 </html>
