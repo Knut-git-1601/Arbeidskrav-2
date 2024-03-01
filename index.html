@@ -98,7 +98,7 @@
     <!-- Deklarerer en div tag -->
 
     <script>
-      let score = 10;
+      let score = 11;
       let genderFilter = "";
       let currentProfile = null;
       let likedProfiles =
@@ -166,7 +166,7 @@
           const answer = prompt("Vil du swipe mer? Ja/Nei");
 
           if (answer.toLowerCase() === "ja") {
-            score = 10;
+            score = 11;
             updateScore();
             return;
           } else if (answer.toLowerCase() === "nei") {
@@ -179,7 +179,7 @@
           }
         }
 
-        if (likedProfiles.length >= 10) {
+        if (likedProfiles.length >= 11) {
           alert("Oversiktslisten er full. Slett en profil for å swipe igjen");
           return;
         }
