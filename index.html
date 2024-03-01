@@ -6,6 +6,7 @@
     <title>Dating app</title>
     <style>
       body {
+        background-color: rgba(3, 205, 255, 0.106);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -62,6 +63,13 @@
   <body>
     <div id="score"></div>
     <div id="card"></div>
+
+    <div>
+        <button onclick="filter('male')">Søk menn</button>
+        <button onclick="filter('female')">Søk kvinne</button>
+        <button onclick="filter('both')">Søk begge</button>
+      </div>
+      
     <div id="overview"></div>
 
     <div class="overlay" id="overlay"></div>
@@ -84,17 +92,13 @@
       <br />
 
       <button onclick="saveChanges()">Lagre endringer</button
-      > <!-- Knapp for å lagre endringer -->
+      ><!-- Knapp for å lagre endringer -->
       <button onclick="closePopup()">Avbryt</button
-      > <!-- Knapp for å avbryte endringer -->
+      ><!-- Knapp for å avbryte endringer -->
     </div>
     <!-- Deklarerer en div tag -->
 
-    <div>
-      <button onclick="filter('male')">Søk menn</button>
-      <button onclick="filter('female')">Søk kvinne</button>
-      <button onclick="filter('both')">Søk begge</button>
-    </div>
+    
 
     <script>
       let score = 10;
@@ -162,7 +166,7 @@
 
       function swipe(direction) {
         while (score <= 0) {
-          const answer = confirm("Vil du swipe mer? Ja/Nei");
+          const answer = prompt("Vil du swipe mer? Ja/Nei");
 
           if (answer.toLowerCase() === "ja") {
             score = 10;
