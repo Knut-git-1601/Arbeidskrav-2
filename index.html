@@ -124,7 +124,7 @@
         const url = genderFilter
           ? `https://randomuser.me/api/?inc=gender,name,location,picture,dob&gender=${genderFilter}`
           : "https://randomuser.me/api/?inc=gender,name,location,picture,dob";
-
+       
         fetch(url)
           .then((response) => response.json())
           .then((data) => {
