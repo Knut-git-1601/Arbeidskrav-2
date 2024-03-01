@@ -146,22 +146,30 @@
       //funksjon for framvisning av kort på siden, henter in variabler div"card.
       // oppdaterer koden med html koden som skal vise profilinformasjonen.
       function displayProfile() {
-        const card = document.getElementById("card");
-        card.innerHTML = `
-<img src="${currentProfile.picture.large}" alt="Profile Pictures">
-<p>Navn: ${currentProfile.name.first}</p>
-<p>Alder: ${currentProfile.dob.age}</p>
-<p>Land: ${currentProfile.location.country}</p>
-`;
-        if (currentProfile.gender === "female") {
-          card.style.backgroundColor = "lightpink";
-        } else if (currentProfile.gender === "male") {
-          card.style.backgroundColor = "cadetblue";
-        } else {
-          card.style.backgroundColor = "yellow";
-        }
-        card.classList = currentProfile.gender;
-      }
+  const card = document.getElementById("card");
+
+  if (currentProfile) {
+    card.innerHTML = `
+      <img src="${currentProfile.picture.large}" alt="Profile Pictures"></img>
+      <p>Navn: ${currentProfile.name.first}</p>
+      <p>Alder: ${currentProfile.dob.age}</p>
+      <p>Land: ${currentProfile.location.country}</p>
+    `;
+    if (currentProfile.gender === "female") {
+      card.style.backgroundColor = "lightpink";
+    } else if (currentProfile.gender === "male") {
+      card.style.backgroundColor = "cadetblue";
+    } else {
+      card.style.backgroundColor = "yellow";
+    }
+    card.classList = currentProfile.gender;
+  } else {
+    card.innerHTML = "Ingen profil tilgjengelig.";
+    card.style.backgroundColor = "white"; 
+    card.classList = ""; 
+  }
+}
+      
 
       function swipe(direction) {
         while (score <= 0) {
