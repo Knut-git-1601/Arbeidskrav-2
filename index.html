@@ -64,11 +64,11 @@
     <div id="score"></div>
     <div id="card"></div>
     <div>
-        <button onclick="filter('male')">Søk menn</button>
-        <button onclick="filter('female')">Søk kvinne</button>
-        <button onclick="filter('both')">Søk begge</button>
-      </div>
-      
+      <button onclick="filter('male')">Søk menn</button>
+      <button onclick="filter('female')">Søk kvinne</button>
+      <button onclick="filter('both')">Søk begge</button>
+    </div>
+
     <div id="overview"></div>
 
     <div class="overlay" id="overlay"></div>
@@ -96,8 +96,6 @@
       ><!-- Knapp for å avbryte endringer -->
     </div>
     <!-- Deklarerer en div tag -->
-
-    
 
     <script>
       let score = 10;
@@ -170,6 +168,7 @@
           if (answer.toLowerCase() === "ja") {
             score = 10;
             updateScore();
+            return;
           } else if (answer.toLowerCase() === "nei") {
             continue;
           } else {
