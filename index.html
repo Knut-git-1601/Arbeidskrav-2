@@ -193,7 +193,7 @@ function deleteProfile(name) { //Funksjon for å slette profil
         updateOverview(); //Oppdaterer scoren
       }
 
-      function editProfile(name, age, place) { //Funksjon for å redigere profil
+function editProfile(name, age, place) { //Del 1 - Funksjon for å redigere profil
         profileIndex = -1; //Lager en variabel for å lagre indeksen til profilen som skal redigeres
 
         for (let i = 0; i < likedProfiles.length; i++) { //Løkke for å finne profilen som skal redigeres
@@ -202,8 +202,18 @@ function deleteProfile(name) { //Funksjon for å slette profil
             break; // Avslutt løkken når elementet er funnet
           }
         }
-        // Ny if-setning med logikk for å faktisk oppdatere profilen eller håndtere situasjoner der profilen
-        // ikke finnes skal inn her
+        // Del 2 - If-setning håndterer: hvis profilen blir funnet så vises redigeringspopupen med de eksisterende verdiene
+        // Selve lagring av redigerte eksisterende verdier i input-feltene vil bli utført i en egen funksjon
+        
+        if (profileIndex !== -1) { // Hvis profilen ble funnet vis redigeringspopupen med de eksisterende verdiene
+          document.getElementById("newName").value = name; // Fyller inn eksisterende verdier i input-feltene
+          document.getElementById("newAge").value = age; // Fyller inn eksisterende verdier i input-feltene
+          document.getElementById("newPlace").value = place; // Fyller inn eksisterende verdier i input-feltene
+
+          // Vis overlegg og popup
+          document.getElementById("overlay").style.display = "block"; // Viser overlegg
+          document.getElementById("editPopup").style.display = "block"; // Viser popup
+        }
     }
     </script>
 </body>
