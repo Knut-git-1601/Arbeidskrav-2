@@ -27,6 +27,12 @@ body{
             dogImages = data.messege;
         };
 
+        const fetchUserData = async (num) => {
+            const response = await fetch (`http://randomuser.me/api/inc=name,location,picture&results=${num}`);
+            const data = await response.json();
+            profiles = data.results;
+        };
+
     </script>
 </body>
 </html>
