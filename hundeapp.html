@@ -24,13 +24,19 @@ body{
         const fetchDogData = async (num) => {
             const response = await fetch(`https://dog.ceo/api/breeds/image/${num}`);
             const data = await response.json();
-            dogImages = data.messege;
+            dogImages = data.message;
         };
 
         const fetchUserData = async (num) => {
             const response = await fetch (`http://randomuser.me/api/inc=name,location,picture&results=${num}`);
             const data = await response.json();
             profiles = data.results;
+        };
+
+        const fetchBasedOnDogBreed = async (num) => {
+            const response = await fetch(`https://dog.ceo/api/breed/${num}/images/random/5`);
+            const data = await response.json();
+            dogImages = data.message;
         };
 
     </script>
