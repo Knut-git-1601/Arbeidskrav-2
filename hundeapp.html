@@ -12,6 +12,14 @@
 <body>
 
     <script>
+        let dogImages, profilies;
+
+        
+        const fetchDogData = async (num) => {
+            const response = await fetch(`https://dog.ceo/api/breeds/image/${num}`);
+            const data = await response.json();
+            dogImages = data.messege;
+        };
 
     </script>
 </body>
