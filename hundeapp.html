@@ -85,6 +85,10 @@
       //--- S ---//
       const loadData = async () => {
         filter = false;
+
+        try {
+          await Promise.all([fetchDogData(10), fetchUserData(10)]);
+        }
       }
 
       
