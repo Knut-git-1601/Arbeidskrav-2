@@ -101,6 +101,10 @@
           const [newDogImage, newProfile] = await Promise.all([fetchDogData(1), fetchUserData(1)]);
           dogImages.push(newDogImage);
           profiles.push(newProfile);
+
+          for (let i = 0; i < 10; i++) {
+            createProfileCard(dogImages[i], profiles[i],i);
+          }
         }
       }
       
