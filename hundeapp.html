@@ -85,11 +85,16 @@
       //--- S ---//
       const loadData = async () => {
         filter = false;
-
         try {
           await Promise.all([fetchDogData(10), fetchUserData(10)]);
+
+          for (let i = 0; i < 10; i++) {
+            createProfileCard(dogImages[i], profiles[i],i);
+          }
+        } catch (error) {
+          console.error(`Feil under henting av data:`, error);
         }
-      }
+      };
 
       
 
