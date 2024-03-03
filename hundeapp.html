@@ -30,56 +30,55 @@
   </head>
   <body>
     <script>
-        let dogImages, profilies;
+          let dogImages, profilies;
 
-        const fetchDogData = async (num) => {
-          //fetchDogData is a function that takes a number as an argument
-          const response = await fetch(`https://dog.ceo/api/breeds/image/${num}`);
-          const data = await response.json();
-          dogImages = data.message;
-        };
+          const fetchDogData = async (num) => {
+            //fetchDogData is a function that takes a number as an argument
+            const response = await fetch(`https://dog.ceo/api/breeds/image/${num}`);
+            const data = await response.json();
+            dogImages = data.message;
+          };
 
-        const fetchUserData = async (num) => {
-          //fetchUserData is a function that takes a number as an argument
-          const response = await fetch(
-            `http://randomuser.me/api/inc=name,location,picture&results=${num}`
-          );
-          const data = await response.json();
-          profiles = data.results;
-        };
+          const fetchUserData = async (num) => {
+            //fetchUserData is a function that takes a number as an argument
+            const response = await fetch(
+              `http://randomuser.me/api/inc=name,location,picture&results=${num}`
+            );
+            const data = await response.json();
+            profiles = data.results;
+          };
 
-        const fetchBasedOnDogBreed = async (num) => {
-          //fetchBasedOnDogBreed is a function that takes a number as an argument
-          const response = await fetch(
-            `https://dog.ceo/api/breed/${num}/images/random/5`
-          );
-          const data = await response.json();
-          dogImages = data.message;
-        };
-
-        
-
-        const createProfileCard = (dogImages, profile, index) => {
-          const card = document.createElement("div");
-          card.classList.add("card");
-
-          const dogImgElement = document.createElement('img');
-    dogImgElement.src = dogImage;
-    card.appendChild(dogImgElement);
-
-          const profileImgElement = document.createElement('img');
-      profileImgElement.src = profile.picture.medium;
-      card.appendChild(profileImgElement);
-
-      const nameElement = document.createElement('p');
-      nameElement.textContent = ${profile.name.title} ${profile.name.first} ${profile.name.last};
-      card.appendChild(nameElement);
-
-      
+          const fetchBasedOnDogBreed = async (num) => {
+            //fetchBasedOnDogBreed is a function that takes a number as an argument
+            const response = await fetch(
+              `https://dog.ceo/api/breed/${num}/images/random/5`
+            );
+            const data = await response.json();
+            dogImages = data.message;
+          };
 
 
 
-        };
+          const createProfileCard = (dogImages, profile, index) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            const dogImgElement = document.createElement('img');
+      dogImgElement.src = dogImage;
+      card.appendChild(dogImgElement);
+
+            const profileImgElement = document.createElement('img');
+        profileImgElement.src = profile.picture.medium;
+        card.appendChild(profileImgElement);
+
+        const nameElement = document.createElement('p');
+        nameElement.textContent = `${profile.name.title} ${profile.name.first} ${profile.name.last}`;
+        card.appendChild(nameElement);
+
+        const residenceElement = document.createElement('p');
+    residenceElement.textContent = `${profile.location.city}, ${profile.location.country}`;
+    card.appendChild(residenceElement);
+          };
     </script>
   </body>
 </html>
