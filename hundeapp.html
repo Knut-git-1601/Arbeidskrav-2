@@ -97,6 +97,9 @@
       };
 
       const loadNewCard = async () => {
+        try {
+          const [newDogImage, newProfile] = await Promise.all([fetchDogData(1), fetchUserData(1)]);
+        }
       }
       
 
