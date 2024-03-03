@@ -65,7 +65,10 @@
       profileImgElement.src = profile.picture.medium;
       card.appendChild(profileImgElement);
 
-      
+      const nameElement = document.createElement('p');
+      nameElement.textContent = ${profile.name.title} ${profile.name.first} ${profile.name.last};
+      card.appendChild(nameElement);
+
 
 
         };
