@@ -84,8 +84,9 @@
 
       //--- S ---//
      const removeAllCards = () => {
-      
-     }
+      const cards = document.querySelectorAll(`.card`);
+      cards.forEach(card => card.remove());
+     };
 
       const loadData = async () => {
         filter = false;
