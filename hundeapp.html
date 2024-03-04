@@ -129,6 +129,10 @@
 
         if (selectedBreed === "any") {
           loadData();
+        } else {
+          try {
+            await Promise.all([fetchBasedOnDogBreed(selectedBreed), fetchUserData(5)]);
+          }
         }
       }
 
