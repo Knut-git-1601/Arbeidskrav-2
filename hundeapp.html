@@ -96,6 +96,7 @@
         residenceElement.textContent = `${profile.location.city}, ${profile.location.country}`;
         card.appendChild(residenceElement);
         if(!filter){
+            const deleteBtn = document.createElement('button');
         }
         document.body.appendChild(card);
       };
@@ -163,6 +164,8 @@
         const chatPopup = document.getElementById(`chatPopup`);
         chatPopup.style.display = chatPopup.style.display === `block` ? `none` : `block`;
       }
+
+      //--S--//
       // Funksjon for å lukke chat-popup
       function closeChat() {
         const chatPopup = document.getElementById('chatPopup');
