@@ -114,7 +114,15 @@
             card.appendChild(deleteBtn);
         }
 
-        const chatBtn = document.createElement('button')
+        const chatBtn = document.createElement('button');
+        chatBtn.classList.add('chat-btn');
+        chatBtn.textContent = 'Chat';
+
+        chatBtn.addEventListener('click',()=>{
+            toggleChatPopup();
+        });
+
+        card.appendChild(chatBtn);
 
         document.body.appendChild(card);
       };
