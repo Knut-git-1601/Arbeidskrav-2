@@ -97,7 +97,17 @@
         card.appendChild(residenceElement);
         if(!filter){
             const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.textContent = 'Slett'
+            deleteBtn.addEventListener.add('click', async () => {
+                card.remove();
+                dogImages.splice(index, 1);
+                profile.splice(index,1)
+                await loadNewCard();
+            });
+            card.appendChild(deleteBtn);
         }
+        
         document.body.appendChild(card);
       };
 
