@@ -169,12 +169,12 @@
         const chatPopup = document.getElementById(`chatPopup`);
         chatPopup.style.display = chatPopup.style.display === `block` ? `none` : `block`;
       }
-
+      // Funksjon for å lukke chat-popup
       function closeChat() {
         const chatPopup = document.getElementById('chatPopup');
         chatPopup.style.display = 'none';
       }
-
+      // Funksjon for å sende melding
       function sendMessage() {
         const inputField = document.getElementById('chatInput');
         const messagesContainer = document.getElementById('chatMessages');
