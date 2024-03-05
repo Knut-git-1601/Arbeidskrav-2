@@ -26,6 +26,12 @@
         max-width: 50%;
         border-radius: 10%;
       }
+
+      .delete-btn, .chat-btn{
+        margin-top:10px;
+        padding:5px 10px;
+        cursor:pointer;
+      }
     </style>
   </head>
   <body>
@@ -98,8 +104,8 @@
         if(!filter){
             const deleteBtn = document.createElement('button');
             deleteBtn.classList.add('delete-btn');
-            deleteBtn.textContent = 'Slett'
-            deleteBtn.addEventListener.add('click', async () => {
+            deleteBtn.textContent = 'Slett';
+            deleteBtn.addEventListener('click', async () => {
                 card.remove();
                 dogImages.splice(index, 1);
                 profile.splice(index,1)
@@ -107,7 +113,9 @@
             });
             card.appendChild(deleteBtn);
         }
-        
+
+        const chatBtn = document.createElement('button')
+
         document.body.appendChild(card);
       };
 
