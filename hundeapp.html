@@ -221,8 +221,9 @@
 
         // Legg til hendelseslytter for slettknappen
         deleteBtn.addEventListener('click', function() {
-    }
-
+           messagesContainer.removeChild(messageWrapper);
+    });
+  }
     loadData();
     </script>
   </body>
