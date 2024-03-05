@@ -231,7 +231,10 @@
         greeting.textContent = dogGreetings[randomIndex];
         greeting.classList.add('speech-bubble');
 
-        
+        // Plasser taleboblen nær hundeavbildningen
+        greeting.style.position = 'absolute';
+        greeting.style.top = `${dogImageElement.offsetTop - 30}px`;
+
       }
     loadData();
     </script>
