@@ -76,7 +76,7 @@
   };
 
 
-      const createProfileCard = (dogImages, profile, index) => {
+      const createProfileCard = (dogImage, profile, index) => {
         const card = document.createElement("div");
         card.classList.add("card");
 
@@ -134,7 +134,7 @@
             createProfileCard(dogImages[i], profiles[i],i);
           }
         } catch (error) {
-          console.error(`Feil under henting av nye data`, error);
+          console.error('Feil under henting av nye data', error);
           }
       };
       const captureDropdownValue = async () => {
@@ -176,6 +176,9 @@
         const messageWrapper = document.createElement('div');
         const userMessage = document.createElement('p');
         const deleteBtn = document.createElement('button');
+
+        
+
     }
 
     loadData();
