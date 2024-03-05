@@ -236,6 +236,11 @@
         greeting.style.top = `${dogImageElement.offsetTop - 30}px`;
 
         document.body.appendChild(greeting);
+
+        // Fjern hilsenen etter noen sekunder
+        setTimeout(() => {
+        greeting.remove();
+        }, 3000);
       }
     loadData();
     </script>
