@@ -207,8 +207,11 @@
         const deleteBtn = document.createElement('button');
 
         // Sett tekst og attributter for brukermeldingen og slettknappen
-        userMessage.textContent = `Meg: ${inputField.value}`;
+        userMessage.textContent = `Meg: ${ingitputField.value}`;
         deleteBtn.textContent = 'Slett';
+        deleteBtn.setAttribute('class', 'delete-message-btn');
+
+
     }
 
     loadData();
