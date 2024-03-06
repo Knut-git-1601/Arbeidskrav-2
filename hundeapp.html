@@ -12,7 +12,6 @@
         justify-content: space-around;
         padding: 20px;
       }
-
       .card {
         border: 1px solid #ddd;
         padding: 15px;
@@ -26,6 +25,69 @@
         max-width: 50%;
         border-radius: 10%;
       }
+
+      .delete-btn, .chat-btn{
+        margin-top:10px;
+        padding:5px 10px;
+        cursor:pointer;
+      }
+
+      .chat-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+      .chat-content {
+        padding: 10px;
+        background-color: white;
+        width: 250px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    }
+
+    .chat-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .chat-messages {
+      height: 200px;
+      overflow-y: auto;
+    }
+
+    .delete-message-btn {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 2px 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .delete-message-btn:hover {
+      background-color: #ff1a1a;
+    }
+
+    /* Juster din .chat-messages p { ... } om nødvendig, slik at meldingen og knappen er riktig justert */
+  .chat-messages p {
+    display: inline-block;
+    margin: 0;
+  }
+  
+  .speech-bubble {
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+  }
     </style>
   </head>
   <body>
