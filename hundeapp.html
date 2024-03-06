@@ -306,6 +306,18 @@
       }
     loadData();
     </script>
-    
+      <div style="margin-top: 100px;"></div>
+      <div id="bottomButtonContainer">
+        <select id="breedDropdown">
+          <option value="any">Alle</option>
+          <option value="borzoi">Borzoi</option>
+          <option value="boxer">Boxer</option>
+          <option value="briard">Briard</option>
+          <option value="bulldog">Bulldog</option>
+          <option value="poodle">Poodle</option>
+        </select>
+        <button onclick="captureDropdownValue()">Last inn etter rase</button>
+        <button id="showNewCardsBtn" onclick="showNewCards()">Vis 10 nye kort</button>
+      </div>
   </body>
 </html>
