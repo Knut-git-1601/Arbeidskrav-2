@@ -12,6 +12,7 @@
         justify-content: space-around;
         padding: 20px;
       }
+
       .card {
         border: 1px solid #ddd;
         padding: 15px;
@@ -25,6 +26,8 @@
         max-width: 50%;
         border-radius: 10%;
       }
+
+     
 
       .delete-btn, .chat-btn{
         margin-top:10px;
@@ -88,6 +91,7 @@
     position: absolute;
     z-index: 2;
   }
+
     </style>
   </head>
   <body>
@@ -219,28 +223,88 @@
             createProfileCard(dogImages[i], profiles[i],i);
           }
         } catch (error) {
-          console.error(`Feil under henting av nye data`, error);
+          console.error('Feil under henting av nye data', error);
           }
       };
+      const captureDropdownValue = async () => {
+        const dropdown = document.getElementById(`breedDropdown`);
+        const selectedBreed = dropdown.value;
+        dogImages = [];
+        profiles = [];
+        filter = true;
+        removeAllCards();
+
+        if (selectedBreed === "any") {
+          loadData();
+        } else {
+          try {
+            await Promise.all([fetchBasedOnDogBreed(selectedBreed), fetchUserData(5)]);
+
+            for (let i = 0; i < 5; i++) {
+              createProfileCard(dogImages[i], profiles[i], i);
+            }
+          } catch (error) {
+            console.error(`Feil ved henting av nye data:`, error);
+          }
+        }
+      };
+      function toggleChatPopup() {
+        const chatPopup = document.getElementById(`chatPopup`);
+        chatPopup.style.display = chatPopup.style.display === `block` ? `none` : `block`;
+      }
+
+      //--S--//
+      // Funksjon for å lukke chat-popup
+      function closeChat() {
+        const chatPopup = document.getElementById('chatPopup');
+        chatPopup.style.display = 'none';
+      }
+      // Funksjon for å sende melding
+      function sendMessage() {
+        const inputField = document.getElementById('chatInput');
+        const messagesContainer = document.getElementById('chatMessages');
       
+        const messageWrapper = document.createElement('div');
+        const userMessage = document.createElement('p');
+        const deleteBtn = document.createElement('button');
 
+        // Sett tekst og attributter for brukermeldingen og slettknappen
+        userMessage.textContent = `Meg: ${inputField.value}`;
+        deleteBtn.textContent = 'Slett';
+        deleteBtn.setAttribute('class', 'delete-message-btn');
 
+        // Legg til brukermelding og slettknapp i meldingsomslaget
+        messageWrapper.appendChild(userMessage);
+        messageWrapper.appendChild(deleteBtn);
+        messagesContainer.appendChild(messageWrapper);
+
+        // Tøm inntastingsfeltet etter å ha sendt en melding
+        inputField.value = '';
+
+        // Legg til hendelseslytter for slettknappen
+        deleteBtn.addEventListener('click', function() {
+           messagesContainer.removeChild(messageWrapper);
+    });
+  }
+
+      function showRandomGreeting(dogImageElement) {
+        const randomIndex = Math.floor(Math.random() * dogGreetings.length);
+        const greeting = document.createElement('span');
+        greeting.textContent = dogGreetings[randomIndex];
+        greeting.classList.add('speech-bubble');
+
+        // Plasser taleboblen nær hundeavbildningen
+        greeting.style.position = 'absolute';
+        greeting.style.top = `${dogImageElement.offsetTop - 30}px`;
+
+        document.body.appendChild(greeting);
+
+        // Fjern hilsenen etter noen sekunder
+        setTimeout(() => {
+        greeting.remove();
+        }, 3000);
+      }
+    loadData();
     </script>
-
-    <div style="margin-top: 100px;"></div>
-    
-    <div style="margin-top: 100px;"></div>
-    <div id="bottomButtonContainer">
-      <select id="breedDropdown">
-        <option value="any">Alle</option>
-        <option value="borzoi">Borzoi</option>
-        <option value="boxer">Boxer</option>
-        <option value="briard">Briard</option>
-        <option value="bulldog">Bulldog</option>
-        <option value="poodle">Poodle</option>
-      </select>
-      <button onclick="captureDropdownValue()">Last inn etter rase</button>
-      <button id="showNewCardsBtn" onclick="showNewCards()">Vis 10 nye kort</button>
-    </div>
   </body>
 </html>
