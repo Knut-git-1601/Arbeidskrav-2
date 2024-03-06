@@ -117,6 +117,7 @@
             <span>Chat med eier</span>
             <button onclick="closeChat()">Lukk</button>
           </div>
+          
           <div id="chatMessages" class="chat-messages">
             <p>Eier: Hei!</p>
           </div>
@@ -160,50 +161,55 @@
   };
 
 
-      const createProfileCard = (dogImage, profile, index) => {
-        const card = document.createElement("div");
-        card.classList.add("card");
+  const createProfileCard = (dogImage, profile, index) => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.addEventListener('click',() => showRandomGreeting(dogImgElement));
 
-        const dogImgElement = document.createElement("img");
-        dogImgElement.src = dogImage;
-        card.appendChild(dogImgElement);
+  const dogImgElement = document.createElement("img");
+  dogImgElement.src = dogImage;
+  card.appendChild(dogImgElement);
 
-        const profileImgElement = document.createElement("img");
-        profileImgElement.src = profile.picture.medium;
-        card.appendChild(profileImgElement);
+  if (profile && profile.picture && profile.picture.medium) {
+    const profileImgElement = document.createElement("img");
+    profileImgElement.src = profile.picture.medium;
+    card.appendChild(profileImgElement);
+  }
 
-        const nameElement = document.createElement("p");
-        nameElement.textContent = `${profile.name.title} ${profile.name.first} ${profile.name.last}`;
-        card.appendChild(nameElement);
+  const nameElement = document.createElement("p");
+  nameElement.textContent = `${profile.name?.title || ''} ${profile.name?.first || ''} ${profile.name?.last || ''}`;
+  card.appendChild(nameElement);
 
-        const residenceElement = document.createElement("p");
-        residenceElement.textContent = `${profile.location.city}, ${profile.location.country}`;
-        card.appendChild(residenceElement);
-        if(!filter){
-            const deleteBtn = document.createElement('button');
-            deleteBtn.classList.add('delete-btn');
-            deleteBtn.textContent = 'Slett';
-            deleteBtn.addEventListener('click', async () => {
-                card.remove();
-                dogImages.splice(index, 1);
-                profiles.splice(index,1)
-                await loadNewCard();
-            });
-            card.appendChild(deleteBtn);
-        }
+  const residenceElement = document.createElement("p");
+  residenceElement.textContent = `${profile.location?.city || ''}, ${profile.location?.country || ''}`;
+  card.appendChild(residenceElement);
 
-        const chatBtn = document.createElement('button');
-        chatBtn.classList.add('chat-btn');
-        chatBtn.textContent = 'Chat';
+  if (!filter) {
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.textContent = 'Slett';
+    deleteBtn.addEventListener('click', async () => {
+      card.remove();
+      dogImages.splice(index, 1);
+      profiles.splice(index, 1);
+      await loadNewCard();
+    });
+    card.appendChild(deleteBtn);
+  }
 
-        chatBtn.addEventListener('click',()=>{
-            toggleChatPopup();
-        });
+  const chatBtn = document.createElement('button');
+  chatBtn.classList.add('chat-btn');
+  chatBtn.textContent = 'Chat';
 
-        card.appendChild(chatBtn);
+  chatBtn.addEventListener('click', () => {
+    toggleChatPopup();
+  });
 
-        document.body.appendChild(card);
-      };
+  card.appendChild(chatBtn);
+
+  document.body.appendChild(card);
+};
+
 
       //--- S ---//
      const removeAllCards = () => {
@@ -303,23 +309,23 @@
     });
   }
 
-      function showRandomGreeting(dogImageElement) {
-        const randomIndex = Math.floor(Math.random() * dogGreetings.length);
-        const greeting = document.createElement('span');
-        greeting.textContent = dogGreetings[randomIndex];
-        greeting.classList.add('speech-bubble');
+  function showRandomGreeting(dogImageElement) {
+  const randomIndex = Math.floor(Math.random() * dogGreetings.length);
+  const greeting = document.createElement('span');
+  greeting.textContent = dogGreetings[randomIndex];
+  greeting.classList.add('speech-bubble');
+  // Plasser taleboblen nær hundeavbildningen
+  greeting.style.position = 'absolute';
+  greeting.style.left = `${dogImageElement.offsetLeft}px`;
+  greeting.style.top = `${dogImageElement.offsetTop - 30}px`;
+  
+  document.body.appendChild(greeting);
 
-        // Plasser taleboblen nær hundeavbildningen
-        greeting.style.position = 'absolute';
-        greeting.style.top = `${dogImageElement.offsetTop - 30}px`;
-
-        document.body.appendChild(greeting);
-
-        // Fjern hilsenen etter noen sekunder
-        setTimeout(() => {
-        greeting.remove();
-        }, 3000);
-      }
+  // Fjern hilsenen etter noen sekunder
+  setTimeout(() => {
+    greeting.remove();
+  }, 3000);
+}
     loadData();
     </script>
       <div style="margin-top: 100px;"></div>
