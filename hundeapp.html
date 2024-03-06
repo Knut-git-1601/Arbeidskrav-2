@@ -27,6 +27,8 @@
         border-radius: 10%;
       }
 
+     
+
       .delete-btn, .chat-btn{
         margin-top:10px;
         padding:5px 10px;
@@ -106,10 +108,12 @@
        <button onclick="sendMessage()">Send</button>
        </div>
     </div> 
+
+    
     
     <script>
       // Deklarerer dogImages og profiles som globale variabler samt en array med hundehilsener
-      let dogImages, profilies;
+      let dogImages, profiles;
       let filter = false;
       const dogGreetings = [
       "Voff voff",
@@ -166,7 +170,7 @@
             deleteBtn.addEventListener('click', async () => {
                 card.remove();
                 dogImages.splice(index, 1);
-                profile.splice(index,1)
+                profiles.splice(index,1)
                 await loadNewCard();
             });
             card.appendChild(deleteBtn);
@@ -265,7 +269,7 @@
         const deleteBtn = document.createElement('button');
 
         // Sett tekst og attributter for brukermeldingen og slettknappen
-        userMessage.textContent = `Meg: ${ingitputField.value}`;
+        userMessage.textContent = `Meg: ${inputField.value}`;
         deleteBtn.textContent = 'Slett';
         deleteBtn.setAttribute('class', 'delete-message-btn');
 
