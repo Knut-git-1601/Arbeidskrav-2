@@ -111,18 +111,19 @@
   </head>
   <body>
     <!-- En struktur for en "chat-popup -->
-    <div id="chatPopup" class="chat-popup" style="display:none;"></div>
-      <div class="chat-content"> 
-        <div class="chat-header"></div>
-         <span>Chat med eier</span>
-         <button onclick="closeChat()">Lukk</button>
-        <div id="chatMessages" class="chat-messages">
-        <p>Eier: Hei!</p>
+    <div id="chatPopup" class="chat-popup" style="display:none;">
+        <div class="chat-content">
+          <div class="chat-header">
+            <span>Chat med eier</span>
+            <button onclick="closeChat()">Lukk</button>
+          </div>
+          <div id="chatMessages" class="chat-messages">
+            <p>Eier: Hei!</p>
+          </div>
+          <input type="text" id="chatInput" placeholder="Skriv melding...">
+          <button onclick="sendMessage()">Send</button>
+        </div>
       </div>
-      <input type="text" id="chatInput" placeholder="Skriv melding...">
-       <button onclick="sendMessage()">Send</button>
-       </div>
-    </div> 
 
     
     
