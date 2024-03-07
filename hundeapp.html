@@ -241,6 +241,8 @@
           dogImages.push(newDogImage);
           profiles.push(newProfile);
 
+          
+
           for (let i = 0; i < 10; i++) {
             createProfileCard(dogImages[i], profiles[i],i);
           }
@@ -248,6 +250,7 @@
           console.error('Feil under henting av nye data', error);
           }
       };
+      
       const captureDropdownValue = async () => {
         const dropdown = document.getElementById(`breedDropdown`);
         const selectedBreed = dropdown.value;
